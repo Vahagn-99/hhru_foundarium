@@ -42,17 +42,11 @@ class CarActionTest extends TestCase
 
     public function test_create_new_car_with_user_id(): void
     {
-        $user = User::factory()->create();
-
-        $this->actingAs($user);
-
-        $this->assertAuthenticatedAs($user);
-
-        $car = Car::factory()->make();
+        $user = $this->authUser();
 
         $response = $this->post(\route('cars.store', [
-            'model' => $car->model,
-            'class' => $car->class,
+            'model' => $this->car->model,
+            'class' => $this->car->class,
             'user_id' => $user->id,
         ]));
 
@@ -62,7 +56,6 @@ class CarActionTest extends TestCase
     public function test_show_car_getting_by_id(): void
     {
         $this->authUser();
-
 
         $response = $this->get(\route('cars.show', [
             'car' => $this->car->id,
