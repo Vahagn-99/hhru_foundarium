@@ -25,6 +25,15 @@ class RentCarTest extends TestCase
         $this->car = Car::factory()->create(['user_id' => $this->user->id]);
     }
 
+    public function test_get_available_cars(): void
+    {
+
+        $cars = Car::factory(5)->create(CarRepositoryInterface::DETACH);
+        $cars->map(function ($car) {
+            $this->assertTrue($car->available);
+        });
+    }
+
     public function test_user_can_rent_a_car(): void
     {
         $this->car->update(CarRepositoryInterface::DETACH);

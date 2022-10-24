@@ -1,0 +1,373 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Swagger API documentation",
+        "contact": {
+            "email": "vahagn99ghukasyan@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cars": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Display a listing of the resource",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "The all cars"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Create yet another example record",
+                "operationId": "storeCars",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "New car created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CarRequest"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/cars/{car}": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Display the specified resource",
+                "operationId": "Get car by id",
+                "parameters": [
+                    {
+                        "name": "car",
+                        "in": "path",
+                        "description": "The ID of car",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Invalid tag value"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Update car by ID",
+                "operationId": "carUpdate",
+                "parameters": [
+                    {
+                        "name": "car",
+                        "in": "path",
+                        "description": "The ID of car",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Delete car by ID",
+                "operationId": "CarDelete",
+                "parameters": [
+                    {
+                        "name": "car",
+                        "in": "path",
+                        "description": "The ID of car",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/available-cars": {
+            "get": {
+                "tags": [
+                    "Rent car"
+                ],
+                "summary": "Get all available cars in this time",
+                "operationId": "availableCars",
+                "responses": {
+                    "200": {
+                        "description": "The available cars",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/attach/{car}/{user}": {
+            "post": {
+                "tags": [
+                    "Rent car"
+                ],
+                "summary": "Attach car to user if both are available",
+                "operationId": "attachCar",
+                "parameters": [
+                    {
+                        "name": "car",
+                        "in": "path",
+                        "description": "ID of car",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car attached to user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Car or User is not available"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/detach/{car}": {
+            "post": {
+                "tags": [
+                    "Rent car"
+                ],
+                "summary": "Detach the given car from any user",
+                "operationId": "detachCar",
+                "parameters": [
+                    {
+                        "name": "car",
+                        "in": "path",
+                        "description": "ID of car",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Car detached from user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Car whit given id is not exisit"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApiResponse": {
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CarRequest": {
+                "title": "Example storring request",
+                "description": "Some simple request createa as example",
+                "properties": {
+                    "model": {
+                        "title": "Model",
+                        "description": "Model of key for storring",
+                        "type": "string",
+                        "example": "Ford"
+                    },
+                    "class": {
+                        "title": "Class",
+                        "description": "Class for storring",
+                        "type": "string",
+                        "example": "focus"
+                    },
+                    "user_id": {
+                        "title": "User Id",
+                        "description": "User Id for storring",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "UserModel": {
+                "title": "Example user's model",
+                "description": "Some simple request createa as example",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "The  name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Сергей Сергеев"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Email of user",
+                        "type": "string",
+                        "format": "email",
+                        "example": "sergeev2@example.com"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Laravel Sanctum token authentication",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cars",
+            "description": "Car CRUD"
+        },
+        {
+            "name": "Rent car",
+            "description": "Rent car functionality"
+        }
+    ]
+}

@@ -18,13 +18,13 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('cars', \App\Http\Controllers\CarController::class)
-    ->middleware('auth')
-;
+Route::apiResource('cars', \App\Http\Controllers\Api\CarController::class)
+    ->middleware(['web']);
 
-Route::controller(\App\Http\Controllers\RentCarController::class)
-    ->middleware(['auth'])
+Route::controller(\App\Http\Controllers\Api\RentCarController::class)
+    ->middleware(['web'])
     ->group(static function () {
+        Route::get('/available-cars', 'availableCars');
         Route::post('/attach/{car}/{user?}', 'attach');
         Route::post('/detach/{car}', 'detach');
     });
