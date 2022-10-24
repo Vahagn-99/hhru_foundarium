@@ -12,12 +12,16 @@ Clone project `
 Install dependencies `
 ```bash
   composer update && composer install
+```
 
-  my-project
-
-  cp .env.example .env
- ```
+  cd hhru_foundarium
+ 
 ## Configuration
+
+```bash
+cp .env.example .env
+```
+
   config .env
    - `DB_DATABASE` =
    - `TEST_DB_DATABASE` = 'test_foundarium'
