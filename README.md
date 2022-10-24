@@ -1,11 +1,15 @@
 
-# Laravel Test Project  Foundarium
+# Laravel Test Project  Foundation
 
 
 
 ## Installation
 
-clone project
+Clone project ` 
+```bash
+  git clone https://github.com/Vahagn-99/hhru_foundarium.git
+```
+Install dependencies `
 ```bash
   composer update && composer install
 
@@ -18,8 +22,10 @@ clone project
    - `TEST_DB_DATABASE` = 'test_foundarium'
    - `DB_USERNAME` =
    - `DB_PASSWORD` =
+
+Run Migrations and Seeds `
 ```bash
-  php artisan migrate
+  php artisan migrate:fresh --seed
 ```
 
 Run test ` 
