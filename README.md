@@ -17,6 +17,7 @@ Install dependencies `
 
   cp .env.example .env
  ```
+## Configuration
   config .env
    - `DB_DATABASE` =
    - `TEST_DB_DATABASE` = 'test_foundarium'
