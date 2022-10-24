@@ -8,13 +8,13 @@
 Clone project ` 
 ```bash
   git clone https://github.com/Vahagn-99/hhru_foundarium.git
+  
+  cd hhru_foundarium
 ```
 Install dependencies `
 ```bash
   composer update && composer install
 ```
-
-  cd hhru_foundarium
  
 ## Configuration
 
