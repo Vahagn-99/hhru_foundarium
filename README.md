@@ -23,10 +23,10 @@ cp .env.example .env
 ```
 
   config .env
-   - `DB_DATABASE` =
+   - `DB_DATABASE` = 'my_db_name'
    - `TEST_DB_DATABASE` = 'test_foundarium'
-   - `DB_USERNAME` =
-   - `DB_PASSWORD` =
+   - `DB_USERNAME` = 'my_db_user_name'
+   - `DB_PASSWORD` = 'my_db_user_password'
 
 Run Migrations and Seeds `
 ```bash
